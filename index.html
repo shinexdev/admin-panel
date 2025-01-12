@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .input-container {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-container input {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+
+        .edit-container, .card-container {
+            margin: 20px 10px;
+        }
+
+        .edit-container {
+            width: 57%;
+        }
+
+        .card-container {
+            width: 37%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card {
+            width: 95%;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .card img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            width: 20%;
+            padding-right: 10px;
+            text-align: right;
+            font-size: 10px;
+        }
+
+        .form-group input {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f4f4f9;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-actions button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 40%;
+            height: 40px;
+            margin: auto;
+        }
+
+        .form-actions .update {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .form-actions .delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .edit-container {
+            margin: 20px 10px;
+            padding-bottom: 50px; /* Add space at the bottom for the sticky form-actions */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .edit-container, .card-container {
+                width: 100%;
+            }
+
+            .card-container {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Input Section -->
+    <div class="input-container">
+        <input type="text" id="jsonInput" placeholder="Enter JSON string">
+        <button onclick="loadData()">Input Data</button>
+        <button onclick="saveToLocal()">Save Data</button>
+        <button onclick="clearLocal()">Clear Data</button>
+    </div>
+
+    <!-- Data Section -->
+    <div class="edit-container">
+        <h3>Edit Form</h3>
+        <form id="editForm">
+            <div class="form-actions">
+                <button type="button" class="update" onclick="updateCard()">Update</button>
+                <button type="button" class="delete" onclick="deleteCard()">Delete</button>
+            </div>
+            <div class="form-group">
+                <label for="editLeague">League:</label>
+                <input type="text" id="editLeague">
+            </div>
+            <div class="form-group">
+                <label for="editTime">Time:</label>
+                <input type="text" id="editTime">
+            </div>
+            <div class="form-group">
+                <label for="editDate">Date:</label>
+                <input type="text" id="editDate">
+            </div>
+            <div class="form-group">
+                <label for="editHome">Home:</label>
+                <input type="text" id="editHome">
+            </div>
+            <div class="form-group">
+                <label for="editHomeImg">HomeImg:</label>
+                <input type="text" id="editHomeImg">
+            </div>
+            <div class="form-group">
+                <label for="editAway">Away:</label>
+                <input type="text" id="editAway">
+            </div>
+            <div class="form-group">
+                <label for="editAwayImg">AwayImg:</label>
+                <input type="text" id="editAwayImg">
+            </div>
+            <div class="form-group">
+                <label for="editID">Match Id:</label>
+                <input type="text" id="editID" disabled>
+            </div>
+            <div class="form-group">
+                <label for="editVHD">V HD URL:</label>
+                <input type="text" id="editVHD">
+            </div>
+            <div class="form-group">
+                <label for="editVSD">V SD URL:</label>
+                <input type="text" id="editVSD">
+            </div>
+            <div class="form-group">
+                <label for="editVHD1">V HD 1 URL:</label>
+                <input type="text" id="editVHD1">
+            </div>
+            <div class="form-group">
+                <label for="editVSD1">V SD 1 URL:</label>
+                <input type="text" id="editVSD1">
+            </div>
+            <div class="form-group">
+                <label for="editVHD2">V HD 2 URL:</label>
+                <input type="text" id="editVHD2">
+            </div>
+            <div class="form-group">
+                <label for="editVSD2">V SD 2 URL:</label>
+                <input type="text" id="editVSD2">
+            </div>
+            <div class="form-group">
+                <label for="editENHD">EN HD URL:</label>
+                <input type="text" id="editENHD">
+            </div>
+            <div class="form-group">
+                <label for="editENHD1">EN HD 1 URL:</label>
+                <input type="text" id="editENHD1">
+            </div>
+            <div class="form-group">
+                <label for="editENSD">EN SD URL:</label>
+                <input type="text" id="editENSD">
+            </div>
+            <div class="form-group">
+                <label for="editCNHD">CN HD URL:</label>
+                <input type="text" id="editCNHD">
+            </div>
+            <div class="form-group">
+                <label for="editCHD">C HD URL:</label>
+                <input type="text" id="editCHD">
+            </div>
+            <div class="form-group">
+                <label for="editCSD">C SD URL:</label>
+                <input type="text" id="editCSD">
+            </div>
+        </form>
+    </div>
+
+    <!-- Card Section -->
+    <div class="card-container" id="cardContainer">
+        <!-- Cards will be populated here dynamically -->
+    </div>
+</div>
+
+<script>
+    let cardData = [];
+    const LOCAL_STORAGE_KEY = 'savedMatchScript';
+    function saveToLocal() {
+        /*const textArea = document.getElementById('textInput');
+        const textContent = textArea.value;
+
+        if (textContent.trim() === '') {
+            console.log('Please enter some text before saving.');
+            return;
+        }*/
+        const script = document.createElement('script');
+        const jsonString = JSON.stringify(cardData, null, 2); // Pretty-print with 4-space indentation
+        // Output the final data structure in the required format
+        //const test = `var json_data = \`${jsonString}\`;`;
+        const test = `var match_data = ${jsonString};`;
+        script.textContent = test;
+        const clipboardItem = new ClipboardItem({
+            "text/plain": new Blob(
+                [script.outerHTML],
+                {type: "text/plain"}
+            ),
+            "text/html": new Blob(
+                [script.outerHTML],
+                {type: "text/html"}
+            ),
+        });
+        navigator.clipboard.write([clipboardItem]);
+        try {
+            localStorage.setItem(LOCAL_STORAGE_KEY, script.outerHTML.trim());
+            console.log('Data has been saved locally!');
+        } catch (err) {
+            console.error('Error saving data to localStorage:', err);
+        }
+        console.log(script);
+    }
+
+    // Load text from local storage
+    function loadFromLocal() {
+        const savedText = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+        if (savedText) {
+            //document.getElementById('textInput').value = savedText;
+            console.log('Your saved text has been loaded!');
+        } else {
+            console.log('No text found in local storage.');
+        }
+    }
+
+    // Clear text from local storage
+    function clearLocal() {
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+        location.reload();
+        console.log('Your saved text has been cleared!');
+    }
+
+    // Automatically load text from local storage on page load
+    window.onload = function () {
+        const savedText = localStorage.getItem(LOCAL_STORAGE_KEY);
+        const regex = /<script>var match_data = (.*?);<\/script>/s;
+        const match = regex.exec(savedText);
+        if (match && match[1]) {
+            try {
+                cardData = JSON.parse(match[1]);
+                renderCards();
+            } catch (e) {
+                console.error("Invalid JSON data:", e);
+            }
+        } else {
+            console.error("No matching script data found!");
+        }
+    };
+
+    function loadData() {
+        // Fetch the HTML content containing the script
+        const scriptContent = document.getElementById('jsonInput').value;
+        const regex = /<script>var match_data = (.*?);<\/script>/s;
+        const match = regex.exec(scriptContent);
+        if (match && match[1]) {
+            try {
+                cardData = JSON.parse(match[1]);
+                renderCards();
+            } catch (e) {
+                console.error("Invalid JSON data:", e);
+            }
+        } else {
+            console.error("No matching script data found!");
+        }
+    }
+
+    function renderCards() {
+        const cardContainer = document.getElementById('cardContainer');
+        cardContainer.innerHTML = '';
+        cardData.forEach(card => {
+            const cardElement = document.createElement('div');
+            cardElement.classList.add('card');
+            cardElement.onclick = () => populateEditForm(card);
+            cardElement.innerHTML = `
+                <div class="card-title">${card.league}</div>
+                <div class="card-img"><img src="${card.home_img}" alt="${card.home_name}"> <img src="./src/vs.png"> <img src="${card.away_img}" alt="${card.away_name}"></div>
+                <div class="card-content">${card.home_name} vs ${card.away_name}</div>
+            `;
+            cardContainer.appendChild(cardElement);
+        });
+    }
+
+    function populateEditForm(data) {
+        document.getElementById("editID").value = data.id || ""; // Match ID
+        document.getElementById("editVHD").value = data.links[0].url || "";
+        document.getElementById("editVSD").value = data.links[1].url || "";
+        document.getElementById("editVHD1").value = data.links[2].url || "";
+        document.getElementById("editVSD1").value = data.links[3].url || "";
+        document.getElementById("editVHD2").value = data.links[4].url || "";
+        document.getElementById("editVSD2").value = data.links[5].url || "";
+        document.getElementById("editENHD").value = data.links[6].url || "";
+        document.getElementById("editENHD1").value = data.links[7].url || "";
+        document.getElementById("editENSD").value = data.links[8].url || "";
+        document.getElementById("editCNHD").value = data.links[9].url || "";
+        document.getElementById("editCHD").value = data.links[10].url || "";
+        document.getElementById("editCSD").value = data.links[11].url || "";
+        document.getElementById("editLeague").value = data.league || "";
+        document.getElementById("editTime").value = data.time || "";
+        document.getElementById("editDate").value = data.date || "";
+        document.getElementById("editHome").value = data.home_name || "";
+        document.getElementById("editHomeImg").value = data.home_img || "";
+        document.getElementById("editAway").value = data.away_name || "";
+        document.getElementById("editAwayImg").value = data.away_img || "";
+        document.getElementById('editForm').dataset.id = data.id;
+        document.getElementById('editLeague').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateCard() {
+        const cardId = document.getElementById('editForm').dataset.id;
+        const updatedCard = {
+            id: cardId,
+            league: document.getElementById('editLeague').value,
+            time: document.getElementById('editTime').value,
+            date: document.getElementById('editDate').value,
+            home_name: document.getElementById('editHome').value,
+            home_img: document.getElementById('editHomeImg').value,
+            away_name: document.getElementById('editAway').value,
+            away_img: document.getElementById('editAwayImg').value,
+            links: [
+                { "name": "V HD", "url": document.getElementById('editVHD').value || "" },
+                { "name": "V SD", "url": document.getElementById('editVSD').value || "" },
+                { "name": "V HD 1", "url": document.getElementById('editVHD1').value || "" },
+                { "name": "V SD 1", "url": document.getElementById('editVSD1').value || "" },
+                { "name": "V HD 2", "url": document.getElementById('editVHD2').value || "" },
+                { "name": "V SD 2", "url": document.getElementById('editVSD2').value || "" },
+                { "name": "EN HD", "url": document.getElementById('editENHD').value || "" },
+                { "name": "EN HD 1", "url": document.getElementById('editENHD1').value || "" },
+                { "name": "EN SD", "url": document.getElementById('editENSD').value || "" },
+                { "name": "CN HD", "url": document.getElementById('editCNHD').value || "" },
+                { "name": "C HD", "url": document.getElementById('editCHD').value || "" },
+                { "name": "C SD", "url": document.getElementById('editCSD').value || "" }
+            ]
+        };
+
+        const index = cardData.findIndex(card => card.id === cardId);
+        if (index !== -1) {
+            cardData[index] = updatedCard;
+            saveToLocal();
+            renderCards();
+        }
+    }
+
+    function deleteCard() {
+        const cardId = document.getElementById('editForm').dataset.id;
+        cardData = cardData.filter(card => card.id !== cardId);
+        saveToLocal();
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
