@@ -431,7 +431,6 @@
     }
 
     function copyCard() {
-        const cardId = document.getElementById('editForm').dataset.id;
         const tempCardData = cardData.map(card => {
             return {
                 id: card.id,
@@ -445,45 +444,30 @@
             };
         });
 
-        const updatedStyleTwoCard = {
-            id: cardId,
-            league: document.getElementById('editLeague').value,
-            time: document.getElementById('editTime').value,
-            date: document.getElementById('editDate').value,
-            home_name: document.getElementById('editHome').value,
-            home_img: document.getElementById('editHomeImg').value,
-            away_name: document.getElementById('editAway').value,
-            away_img: document.getElementById('editAwayImg').value
-        };
-
-        const index = tempCardData.findIndex(card => card.id === cardId);
-        if (index !== -1) {
-            tempCardData[index] = updatedStyleTwoCard;
-            const script = document.createElement('script');
-            const jsonString = JSON.stringify(tempCardData, null, 2); // Pretty-print with 4-space indentation
-            // Output the final data structure in the required format
-            //const test = `var json_data = \`${jsonString}\`;`;
-            const test = `var match_data = ${jsonString};`;
-            script.textContent = test;
-            const clipboardItem = new ClipboardItem({
-                "text/plain": new Blob(
-                    [script.outerHTML],
-                    {type: "text/plain"}
-                ),
-                "text/html": new Blob(
-                    [script.outerHTML],
-                    {type: "text/html"}
-                ),
-            });
-            navigator.clipboard.write([clipboardItem]);
-            try {
-                localStorage.setItem(LOCAL_STORAGE_KEY, script.outerHTML.trim());
-                console.log('Data has been saved locally!');
-            } catch (err) {
-                console.error('Error saving data to localStorage:', err);
-            }
-            console.log(script);
+        const script = document.createElement('script');
+        const jsonString = JSON.stringify(tempCardData, null, 2); // Pretty-print with 4-space indentation
+        // Output the final data structure in the required format
+        //const test = `var json_data = \`${jsonString}\`;`;
+        const test = `var match_data = ${jsonString};`;
+        script.textContent = test;
+        const clipboardItem = new ClipboardItem({
+            "text/plain": new Blob(
+                [script.outerHTML],
+                {type: "text/plain"}
+            ),
+            "text/html": new Blob(
+                [script.outerHTML],
+                {type: "text/html"}
+            ),
+        });
+        navigator.clipboard.write([clipboardItem]);
+        try {
+            localStorage.setItem(LOCAL_STORAGE_KEY, script.outerHTML.trim());
+            console.log('Data has been saved locally!');
+        } catch (err) {
+            console.error('Error saving data to localStorage:', err);
         }
+        console.log(script);
     }
 
     function deleteCard() {
