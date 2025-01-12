@@ -164,6 +164,7 @@
         <button onclick="loadData()">Input Data</button>
         <button onclick="saveToLocal()">Save Data</button>
         <button onclick="copyCard()">Copy Data</button>
+        <button onclick="copyName()">Copy Name</button>
         <button onclick="clearLocal()">Clear Data</button>
     </div>
 
@@ -469,7 +470,36 @@
         }
         console.log(script);
     }
+    function copyName() {
+        var nameMatches = '';
 
+        // Loop through the cards and get their data
+        cardData.forEach(card => {
+
+            const league = card.league;
+            const home = card.home_name;
+            const away = card.away_name;
+            const date = card.date;
+            const time = card.time;
+            nameMatches +=
+                `🏆${league}\n` +
+                `⏰${date} (${time})\n` +
+                `${home} 🆚 ${away}\n`
+            ;
+        });
+        const clipboardItem = new ClipboardItem({
+            "text/plain": new Blob(
+                [nameMatches.trim()],
+                {type: "text/plain"}
+            ),
+            "text/html": new Blob(
+                [nameMatches.trim()],
+                {type: "text/html"}
+            ),
+        });
+        navigator.clipboard.write([clipboardItem]);
+        console.log(`${nameMatches}`);
+    }
     function deleteCard() {
         const cardId = document.getElementById('editForm').dataset.id;
         cardData = cardData.filter(card => card.id !== cardId);
