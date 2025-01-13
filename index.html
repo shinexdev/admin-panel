@@ -3,384 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <title>Daily Ads Match</title>
     <style>
-      body {
-          font-family: Arial, sans-serif;
-          background-color: #f4f4f9;
-          margin: 0;
-          padding: 0;
-      }
-  
-      .container {
-          display: flex;
-          flex-wrap: wrap;
-          padding: 10px;
-          gap: 20px;
-      }
-  
-      .input-container {
-          width: 100%;
-          margin-bottom: 20px;
-          text-align: center;
-      }
-  
-      .input-container input {
-          width: 80%;
-          padding: 12px;
-          margin: 10px 0;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          font-size: 16px;
-      }
-  
-      .input-container button {
-          padding: 12px 24px;
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 16px;
-          margin: 5px;
-          transition: background-color 0.3s ease;
-      }
-  
-      .input-container button:hover {
-          background-color: #45a049;
-      }
-  
-      .card-container {
-          margin: 20px 0;
-      }
-  
-      .edit-container {
-          width: 60%;
-          background: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-  
-      .card-container {
-          width: 35%;
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-      }
-  
-      .card {
-          width: 100%;
-          background: #fff;
-          border: 1px solid #ddd;
-          padding: 15px;
-          border-radius: 8px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-          cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-  
-      .card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      }
-  
-      .card img {
-          width: 50px;
-          height: 50px;
-          margin-right: 10px;
-          border-radius: 50%;
-      }
-  
-      .card-title {
-          font-size: 18px;
-          font-weight: bold;
-          margin-bottom: 10px;
-      }
-  
-      .card-content {
-          font-size: 14px;
-          color: #555;
-      }
-  
-      .form-group {
-          display: flex;
-          align-items: center;
-          margin-bottom: 15px;
-      }
-  
-      .form-group label {
-          width: 20%;
-          padding-right: 10px;
-          text-align: right;
-          font-size: 14px;
-          color: #333;
-      }
-  
-      .form-group input {
-          width: 80%;
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          font-size: 14px;
-      }
-  
-      .form-actions {
-          position: fixed;
-          bottom: 0;
-          width: 100%;
-          background-color: #f4f4f9;
-          padding: 15px 0;
-          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-      }
-  
-      .form-actions button {
-          padding: 12px 20px;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          width: 40%;
-          font-size: 16px;
-          transition: background-color 0.3s ease;
-      }
-  
-      .form-actions .update {
-          background-color: #4CAF50;
-          color: white;
-      }
-  
-      .form-actions .update:hover {
-          background-color: #45a049;
-      }
-  
-      .form-actions .delete {
-          background-color: #f44336;
-          color: white;
-      }
-  
-      .form-actions .delete:hover {
-          background-color: #e53935;
-      }
-  
-      /* Responsive Design */
-      @media (max-width: 768px) {
-          .container {
-              flex-direction: column;
-          }
-  
-          .edit-container, .card-container {
-              width: 90%;
-          }
-  
-          .card-container {
-              gap: 10px;
-          }
-  
-          .form-group label {
-              width: 20%;
-              font-size: 10px;
-              font-weight: bold;
-          }
-  
-          .form-group input {
-              width: 80%;
-          }
-      }
-  </style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+        :root {
+            --color-text-primary: #ffffff;
+            --color-bg-primary: #000C47;
+            --color-bg-secondary: #f3f5f9;
+            --color-bg-overlay: rgba(2, 2, 2, 0.7);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            line-height: 1.5;
+            color: var(--color-text-primary);
+            background-color: var(--color-bg-secondary);
+            margin: 0;
+        }
+
+        .header {
+            text-align: center;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .main {
+            width: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .mdaily {
+            background-image: url('src/mmfotdailyimg.png');
+            padding-top: 177.78%;
+            background-repeat: no-repeat;
+        }
+
+        .mfb {
+            background-image: url('src/mmfotcomz.png');
+            height: 0;
+            padding-top: 100%;
+        }
+
+        .card-container {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+        }
+        .cfb {
+            top: 47%;
+        }
+
+        .cdaily {
+            top: 54%;
+        }
+        .team-cards {
+            font-size: 18px;
+            margin-bottom: 10px;
+            background: var(--color-bg-overlay);
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center; /* Centering the text */
+        }
+        .live {
+            width: 100px;
+            font-size: 18px;
+            line-height: 1;
+            padding: 4px 15px;
+            background-color: #ff5353;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            margin: 0px 10px 4px;
+        }
+        .live-cus {
+            font-weight: 600;
+            padding-bottom: 5px;
+        }
+        .vs {
+            font-size: 18px;
+            line-height: 1;
+            padding: 4px 15px;
+            background-color: #D97706;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            margin: 0px 10px 4px;
+        }
+        .team-names {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 0px;
+        }
+        .team-home {
+            flex: 1;
+            text-align: right;
+            margin-bottom: 5px;
+        }
+        .team-away {
+            flex: 1;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+        .vs-cus {
+            font-weight: 600;
+            padding-bottom: 5px;
+        }
+        .league-name {
+            font-size: 11px;
+            position: relative;
+            text-align: center;
+        }
+        .id-number {
+            position: absolute;
+            font-size: 6px;
+            color: #a9a9a9;
+            padding: 0px 3px;
+        }
+        .league-text {
+            display: inline-block;
+        }
+        .team-logo {
+            width: 40px; /* Adjust the size as needed */
+            height: 40px; /* Maintain aspect ratio */ /* Space between image and team name */
+            vertical-align: middle; /* Align image with text */
+        }
+
+        .show-all-match{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .show-all-match .match {
+            position: relative;
+            width: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            background: var(--color-bg-overlay);
+        }
+
+        .show-all-match .team img {
+            width: 30px; /* Larger team logos */
+            height: 30px;
+        }
+
+        .show-all-match .match-details {
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--color-text-primary);
+        }
+        .show-all-match .match-content {
+            padding: 5px;
+        }
+
+        .header input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+
+        .header button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: var(--color-bg-primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .header button:hover {
+            background-color: var(--color-bg-overlay);
+        }
+
+        .match {
+            position: relative;
+            width: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            background: var(--color-bg-overlay);
+        }
+
+        .match:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .match-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 15px;
+        }
+
+        .team img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .match-details {
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--color-text-primary);
+        }
+
+        /* Special styles when only one match is present */
+        .card-container.single-match .match {
+            width: 400px; /* Adjust the size for single match */
+            height: auto;
+        }
+
+        .card-container.single-match .team img {
+            width: 120px; /* Larger team logos */
+            height: 120px;
+        }
+
+        .card-container.single-match .match-details {
+            font-size: 24px; /* Larger "VS" text */
+            font-weight: bold;
+            color: var(--color-text-primary);
+        }
+        /* Special styles when multi match is present */
+        .card-container.multi-match .match {
+            width: 270px; /* Adjust the size for single match */
+            height: auto;
+        }
+
+        .card-container.multi-match .team img {
+            width: 90px; /* Larger team logos */
+            height: 90px;
+        }
+
+        .card-container.multi-match .match-details {
+            font-size: 22px; /* Larger "VS" text */
+            font-weight: bold;
+            color: var(--color-text-primary);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
+<div id="dialog" title="Box"></div>
+<div class="header">
+    <input type="text" id="scriptInput" placeholder="Enter Match Data as JSON" />
+    <button onclick="loadData()">Submit</button>
+</div>
 
-<div class="container">
-    <!-- Input Section -->
-    <div class="input-container">
-        <input type="text" id="jsonInput" placeholder="Enter JSON string">
-        <button onclick="loadData()">Submit</button>
-        <button onclick="saveToLocal()">Save Data With Links</button>
-        <button onclick="copyCard()">Copy Data No Links</button>
-        <button onclick="copyName()">Copy Name</button>
-        <button onclick="clearLocal()">Clear Data</button>
-    </div>
+<div class="show-all-match" id="show-all-match">
+    <?php
+    if (isset($_GET['data'])) {
+        $data = $_GET['data'];
+        $cards = json_decode($data, true);
+        foreach ($cards as $card) {
+            $home_img_base64 = base64_encode(file_get_contents($card['home_img']));
+            $away_img_base64 = base64_encode(file_get_contents($card['away_img']));
 
-    <!-- Data Section -->
-    <div class="edit-container">
-        <h3>Edit Form</h3>
-        <form id="editForm">
-            <div class="form-actions">
-                <button type="button" class="update" onclick="updateCard()">Update</button>
-                <button type="button" class="delete" onclick="deleteCard()">Delete</button>
-            </div>
-            <div class="form-group">
-                <label for="editLeague">League:</label>
-                <input type="text" id="editLeague">
-            </div>
-            <div class="form-group">
-                <label for="editTime">Time:</label>
-                <input type="text" id="editTime">
-            </div>
-            <div class="form-group">
-                <label for="editDate">Date:</label>
-                <input type="text" id="editDate">
-            </div>
-            <div class="form-group">
-                <label for="editHome">Home:</label>
-                <input type="text" id="editHome">
-            </div>
-            <div class="form-group">
-                <label for="editHomeImg">HomeImg:</label>
-                <input type="text" id="editHomeImg">
-            </div>
-            <div class="form-group">
-                <label for="editAway">Away:</label>
-                <input type="text" id="editAway">
-            </div>
-            <div class="form-group">
-                <label for="editAwayImg">AwayImg:</label>
-                <input type="text" id="editAwayImg">
-            </div>
-            <div class="form-group">
-                <label for="editID">Match Id:</label>
-                <input type="text" id="editID" disabled>
-            </div>
-            <div class="form-group">
-                <label for="editVHD">V HD URL:</label>
-                <input type="text" id="editVHD">
-            </div>
-            <div class="form-group">
-                <label for="editVSD">V SD URL:</label>
-                <input type="text" id="editVSD">
-            </div>
-            <div class="form-group">
-                <label for="editVHD1">V HD 1 URL:</label>
-                <input type="text" id="editVHD1">
-            </div>
-            <div class="form-group">
-                <label for="editVSD1">V SD 1 URL:</label>
-                <input type="text" id="editVSD1">
-            </div>
-            <div class="form-group">
-                <label for="editVHD2">V HD 2 URL:</label>
-                <input type="text" id="editVHD2">
-            </div>
-            <div class="form-group">
-                <label for="editVSD2">V SD 2 URL:</label>
-                <input type="text" id="editVSD2">
-            </div>
-            <div class="form-group">
-                <label for="editENHD">EN HD URL:</label>
-                <input type="text" id="editENHD">
-            </div>
-            <div class="form-group">
-                <label for="editENHD1">EN HD 1 URL:</label>
-                <input type="text" id="editENHD1">
-            </div>
-            <div class="form-group">
-                <label for="editENSD">EN SD URL:</label>
-                <input type="text" id="editENSD">
-            </div>
-            <div class="form-group">
-                <label for="editCNHD">CN HD URL:</label>
-                <input type="text" id="editCNHD">
-            </div>
-            <div class="form-group">
-                <label for="editCHD">C HD URL:</label>
-                <input type="text" id="editCHD">
-            </div>
-            <div class="form-group">
-                <label for="editCSD">C SD URL:</label>
-                <input type="text" id="editCSD">
-            </div>
-        </form>
-    </div>
+            echo '<div class="match" data-league="' . $card['league'] . '" data-home="' . $card['home_name'] . '" data-away="' . $card['away_name'] . '" data-date="' . $card['date'] . '" data-time="' . $card['time'] . '">
+                        <div class="match-content">
+                            <input type="checkbox" class="match-checkbox" data-home="' . $card['home_name'] . '" data-away="' . $card['away_name'] . '" data-home-img="' . $home_img_base64 . '" data-away-img="' . $away_img_base64 . '" data-date="' . $card['date'] . '" data-time="' . $card['time'] . '" />
+                            <div class="team team--home">
+                                <img src="' . $card['home_img'] . '" />
+                            </div>
+                            <div class="match-details">VS</div>
+                            <div class="team team--away">
+                                <img src="' . $card['away_img'] . '" />
+                            </div>
+                        </div>
+                    </div>';
+        }
+    }
+    ?>
+</div>
+<div class="header">
+    <button onclick="showSelectedMatches()">Show Selected Matches</button>
+    <button onclick="clearSelectedMatches()">Clear Selected</button>
+    <button id="getCardNameButton">Get Card Name</button>
+</div>
+<div class="header">
+    <button id="btn1">Daily</button>
+    <button id="btn2">FB</button>
+</div>
 
-    <!-- Card Section -->
-    <div class="card-container" id="cardContainer">
-        <!-- Cards will be populated here dynamically -->
+<div class="main mdaily" id="main" onclick="downImage()">
+    <div class="card-container cdaily" id="cardContainer">
+        <?php
+        /*        if (isset($_GET['data'])) {
+                    $data = $_GET['data'];
+                    $cards = json_decode($data, true);
+
+                    foreach ($cards as $card) {
+                        $home_img_base64 = base64_encode(file_get_contents($card['home_img']));
+                        $away_img_base64 = base64_encode(file_get_contents($card['away_img']));
+
+                        echo '<div class="match">
+                                <div class="match-content">
+                                    <div class="team team--home">
+                                        <img src="data:image/png;base64,' . $home_img_base64 . '" alt="' . $card['home_name'] . '" />
+                                    </div>
+                                    <div class="match-details">VS</div>
+                                    <div class="team team--away">
+                                        <img src="data:image/png;base64,' . $away_img_base64 . '" alt="' . $card['away_name'] . '" />
+                                    </div>
+                                </div>
+                            </div>';
+                    }
+                }
+                */?>
     </div>
 </div>
 
 <script>
-    let cardData = [];
-    const LOCAL_STORAGE_KEY = 'savedMatchScript';
-    function saveToLocal() {
-        /*const textArea = document.getElementById('textInput');
-        const textContent = textArea.value;
+    document.getElementById('getCardNameButton').addEventListener('click', function () {
+        // Get all the match cards from the card container
+        const cardContainer = document.getElementById('show-all-match');
+        const cards = cardContainer.querySelectorAll('.match'); // Select all match divs
 
-        if (textContent.trim() === '') {
-            console.log('Please enter some text before saving.');
-            return;
-        }*/
-        const script = document.createElement('script');
-        const jsonString = JSON.stringify(cardData, null, 2); // Pretty-print with 4-space indentation
-        // Output the final data structure in the required format
-        //const test = `var json_data = \`${jsonString}\`;`;
-        const test = `var match_data = ${jsonString};`;
-        script.textContent = test;
-        const clipboardItem = new ClipboardItem({
-            "text/plain": new Blob(
-                [script.outerHTML],
-                {type: "text/plain"}
-            ),
-            "text/html": new Blob(
-                [script.outerHTML],
-                {type: "text/html"}
-            ),
+        // Initialize an empty array to hold card data
+        var nameMatches = '';
+
+        // Loop through the cards and get their data
+        cards.forEach(card => {
+
+            const league = card.getAttribute("data-league");
+            const home = card.getAttribute("data-home");
+            const away = card.getAttribute("data-away");
+            const date = card.getAttribute("data-date");
+            const time = card.getAttribute("data-time");
+            nameMatches +=
+                `🏆${league}\n` +
+                `⏰${date} (${time})\n` +
+                `${home} 🆚 ${away}\n`
+            ;
         });
-        navigator.clipboard.write([clipboardItem]);
-        try {
-            localStorage.setItem(LOCAL_STORAGE_KEY, script.outerHTML.trim());
-            console.log('Data has been saved locally!');
-        } catch (err) {
-            console.error('Error saving data to localStorage:', err);
-        }
-        console.log(script);
+
+        console.log(`${nameMatches}`);
+    });
+    function showSelectedMatches() {
+        const selectedMatches = [];
+        const checkboxes = document.querySelectorAll('.match-checkbox:checked');
+
+        checkboxes.forEach(checkbox => {
+            const home = checkbox.getAttribute('data-home');
+            const away = checkbox.getAttribute('data-away');
+            const homeImg = checkbox.getAttribute('data-home-img');
+            const awayImg = checkbox.getAttribute('data-away-img');
+            const date = checkbox.getAttribute('data-date');
+            const time = checkbox.getAttribute('data-time');
+            selectedMatches.push({ home, away, homeImg, awayImg, date, time });
+        });
+
+        // Update the cardContainer with selected matches
+        const cardContainer = document.getElementById('cardContainer');
+        cardContainer.innerHTML = ''; // Clear previous content
+
+        selectedMatches.forEach(match => {
+            const matchDiv = document.createElement('div');
+            matchDiv.classList.add('team-cards');
+            const time = en2mmNumber(match.time);
+            matchDiv.innerHTML = `
+                <div class="team-names">
+                <div class="team-home">
+                    ${match.home} <img src="data:image/png;base64,${match.homeImg}" alt="${match.home}" class="team-logo lazy-yard cbg"> <!-- Home team image -->
+                </div>
+                <div class="vs">
+                    <div class="vs-cus">${match.date}</div>
+                    <div class="vs-cus">${time}</div>
+                </div>
+                <div class="team-away">
+                    <img src="data:image/png;base64,${match.awayImg}" alt="${match.away}" class="team-logo lazy-yard cbg"> ${match.away}
+                </div>
+            </div>
+        `;
+            cardContainer.appendChild(matchDiv);
+        });
+
+        // Apply CSS classes based on the number of selected matches
+        // cardContainer.classList.remove('single-match', 'multi-match'); // Clear previous classes
+        // if (selectedMatches.length <= 2) {
+        //     cardContainer.classList.add('single-match');
+        // } else if (selectedMatches.length <= 4) {
+        //     cardContainer.classList.add('multi-match');
+        // }
     }
 
-    // Load text from local storage
-    function loadFromLocal() {
-        const savedText = localStorage.getItem(LOCAL_STORAGE_KEY);
-
-        if (savedText) {
-            //document.getElementById('textInput').value = savedText;
-            console.log('Your saved text has been loaded!');
-        } else {
-            console.log('No text found in local storage.');
-        }
-    }
-
-    // Clear text from local storage
-    function clearLocal() {
-        localStorage.removeItem(LOCAL_STORAGE_KEY);
-        location.reload();
-        console.log('Your saved text has been cleared!');
-    }
-
-    // Automatically load text from local storage on page load
-    window.onload = function () {
-        const savedText = localStorage.getItem(LOCAL_STORAGE_KEY);
-        const regex = /<script>var match_data = (.*?);<\/script>/s;
-        const match = regex.exec(savedText);
-        if (match && match[1]) {
-            try {
-                cardData = JSON.parse(match[1]);
-                renderCards();
-            } catch (e) {
-                console.error("Invalid JSON data:", e);
-            }
-        } else {
-            console.error("Start: No matching script data found!");
-        }
-    };
-
+    document.addEventListener("DOMContentLoaded", function () {
+        // Ensure initial styles are applied correctly
+        showSelectedMatches();
+    });
     function loadData() {
-        // Fetch the HTML content containing the script
-        const scriptContent = document.getElementById('jsonInput').value;
+        const dataAdd = document.getElementById('scriptInput').value;
         const regex = /<script>var match_data = (.*?);<\/script>/s;
-        const match = regex.exec(scriptContent);
+        const match = regex.exec(dataAdd);
         if (match && match[1]) {
             try {
-                cardData = JSON.parse(match[1]);
-                renderCards();
+                window.location.href = '?data=' + encodeURIComponent(match[1]);
+                // cardData = JSON.parse(match[1]);
+                // renderCards();
             } catch (e) {
                 console.error("Invalid JSON data:", e);
             }
@@ -389,153 +425,67 @@
         }
     }
 
-    function renderCards() {
-        const cardContainer = document.getElementById('cardContainer');
-        cardContainer.innerHTML = '';
-        cardData.forEach(card => {
-            const cardElement = document.createElement('div');
-            cardElement.classList.add('card');
-            cardElement.onclick = () => populateEditForm(card);
-            cardElement.innerHTML = `
-                <div class="card-title">${card.league}</div>
-                <div class="card-img"><img src="${card.home_img}" alt="${card.home_name}"> <img src="./src/vs.png"> <img src="${card.away_img}" alt="${card.away_name}"></div>
-                <div class="card-content">${card.home_name} vs ${card.away_name}</div>
-            `;
-            cardContainer.appendChild(cardElement);
+    // Example usage:
+    //const result = en2mmNumber('12345 PM');
+    //console.log(result);  // Output: ၁၂၃၄၅ည
+    function downImage(){
+        const element = document.getElementById('main');
+        const d = new Date().toISOString().slice(0, 19).replace(/-/g, "");
+        html2canvas(element, {
+            scale: 2,
+            useCORS: true,
+            allowTaint : true,
+            logging: true, letterRendering: 1
+        }).then(function (canvas) {
+            canvas.toBlob(function (blob) {
+                const link = document.createElement('a');
+                link.download = '0-'+d+'.jpg';
+                link.href = URL.createObjectURL(blob);
+                link.click();
+            }, 'image/jpeg', 1.0);
+        }).catch(function (error) {
+            console.error('Error generating image:', error);
         });
     }
-
-    function populateEditForm(data) {
-        document.getElementById("editID").value = data.id || ""; // Match ID
-        document.getElementById("editVHD").value = data.links[0].url || "";
-        document.getElementById("editVSD").value = data.links[1].url || "";
-        document.getElementById("editVHD1").value = data.links[2].url || "";
-        document.getElementById("editVSD1").value = data.links[3].url || "";
-        document.getElementById("editVHD2").value = data.links[4].url || "";
-        document.getElementById("editVSD2").value = data.links[5].url || "";
-        document.getElementById("editENHD").value = data.links[6].url || "";
-        document.getElementById("editENHD1").value = data.links[7].url || "";
-        document.getElementById("editENSD").value = data.links[8].url || "";
-        document.getElementById("editCNHD").value = data.links[9].url || "";
-        document.getElementById("editCHD").value = data.links[10].url || "";
-        document.getElementById("editCSD").value = data.links[11].url || "";
-        document.getElementById("editLeague").value = data.league || "";
-        document.getElementById("editTime").value = data.time || "";
-        document.getElementById("editDate").value = data.date || "";
-        document.getElementById("editHome").value = data.home_name || "";
-        document.getElementById("editHomeImg").value = data.home_img || "";
-        document.getElementById("editAway").value = data.away_name || "";
-        document.getElementById("editAwayImg").value = data.away_img || "";
-        document.getElementById('editForm').dataset.id = data.id;
-        document.getElementById('editLeague').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function updateCard() {
-        const cardId = document.getElementById('editForm').dataset.id;
-        const updatedCard = {
-            id: cardId,
-            league: document.getElementById('editLeague').value,
-            time: document.getElementById('editTime').value,
-            date: document.getElementById('editDate').value,
-            home_name: document.getElementById('editHome').value,
-            home_img: document.getElementById('editHomeImg').value,
-            away_name: document.getElementById('editAway').value,
-            away_img: document.getElementById('editAwayImg').value,
-            links: [
-                { "name": "V HD", "url": document.getElementById('editVHD').value || "" },
-                { "name": "V SD", "url": document.getElementById('editVSD').value || "" },
-                { "name": "V HD 1", "url": document.getElementById('editVHD1').value || "" },
-                { "name": "V SD 1", "url": document.getElementById('editVSD1').value || "" },
-                { "name": "V HD 2", "url": document.getElementById('editVHD2').value || "" },
-                { "name": "V SD 2", "url": document.getElementById('editVSD2').value || "" },
-                { "name": "EN HD", "url": document.getElementById('editENHD').value || "" },
-                { "name": "EN HD 1", "url": document.getElementById('editENHD1').value || "" },
-                { "name": "EN SD", "url": document.getElementById('editENSD').value || "" },
-                { "name": "CN HD", "url": document.getElementById('editCNHD').value || "" },
-                { "name": "C HD", "url": document.getElementById('editCHD').value || "" },
-                { "name": "C SD", "url": document.getElementById('editCSD').value || "" }
-            ]
-        };
-
-        const index = cardData.findIndex(card => card.id === cardId);
-        if (index !== -1) {
-            cardData[index] = updatedCard;
-            saveToLocal();
-            renderCards();
+    function en2mmNumber(content) {
+        if (content.startsWith('0')) {
+            content = content.substring(1); // Remove the starting "0"
         }
+        const en = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'PM', 'AM'];
+        const my = ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉', 'ည', 'မနက်'];
+
+        en.forEach((item, index) => {
+            const regex = new RegExp(item, 'g');
+            content = content.replace(regex, my[index]);
+        });
+
+        return content;
     }
+    document.addEventListener('DOMContentLoaded', () => {
+        function changeBackground(mClass, cClass) {
+            const mainElement = document.getElementById('main');
+            const cardElement = document.getElementById('cardContainer');
+            if (mainElement && cardElement) {
+                mainElement.className = `main ${mClass}`;
+                cardElement.className = `card-container ${cClass}`;
+            } else {
+                console.error('Element with id "main" not found.');
+            }
+        }
 
-    function copyCard() {
-        const tempCardData = cardData.map(card => {
-            return {
-                id: card.id,
-                league: card.league,
-                time: card.time,
-                date: card.date,
-                home_name: card.home_name,
-                home_img: card.home_img,
-                away_name: card.away_name,
-                away_img: card.away_img
-            };
-        });
+        document.getElementById('btn1').addEventListener('click', () => changeBackground('mdaily','cdaily'));
+        document.getElementById('btn2').addEventListener('click', () => changeBackground('mfb','cfb'));
+    });
+    function clearSelectedMatches() {
+        // Uncheck all checkboxes
+        const checkboxes = document.querySelectorAll('.match-checkbox');
+        checkboxes.forEach(checkbox => checkbox.checked = false);
 
-        const script = document.createElement('script');
-        const jsonString = JSON.stringify(tempCardData, null, 2); // Pretty-print with 4-space indentation
-        // Output the final data structure in the required format
-        //const test = `var json_data = \`${jsonString}\`;`;
-        const test = `var match_data = ${jsonString};`;
-        script.textContent = test;
-        const clipboardItem = new ClipboardItem({
-            "text/plain": new Blob(
-                [script.outerHTML],
-                {type: "text/plain"}
-            ),
-            "text/html": new Blob(
-                [script.outerHTML],
-                {type: "text/html"}
-            ),
-        });
-        navigator.clipboard.write([clipboardItem]);
-        console.log(script);
-    }
-    function copyName() {
-        var nameMatches = '';
-
-        // Loop through the cards and get their data
-        cardData.forEach(card => {
-
-            const league = card.league;
-            const home = card.home_name;
-            const away = card.away_name;
-            const date = card.date;
-            const time = card.time;
-            nameMatches +=
-                `🏆${league}\n` +
-                `⏰${date} (${time})\n` +
-                `${home} 🆚 ${away}\n`
-            ;
-        });
-        const clipboardItem = new ClipboardItem({
-            "text/plain": new Blob(
-                [nameMatches.trim()],
-                {type: "text/plain"}
-            ),
-            "text/html": new Blob(
-                [nameMatches.trim()],
-                {type: "text/html"}
-            ),
-        });
-        navigator.clipboard.write([clipboardItem]);
-        console.log(`${nameMatches}`);
-    }
-    function deleteCard() {
-        const cardId = document.getElementById('editForm').dataset.id;
-        cardData = cardData.filter(card => card.id !== cardId);
-        saveToLocal();
-        location.reload();
+        // Clear the selected matches
+        const cardContainer = document.getElementById('cardContainer');
+        cardContainer.innerHTML = ''; // Clear the card container
     }
 </script>
-<!-- <script src="script.js"></script> -->
-
 </body>
 </html>
+
