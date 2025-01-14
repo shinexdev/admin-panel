@@ -396,22 +396,22 @@
         try {
           const tempCardData = JSON.parse(match[1]);
           cardData = tempCardData.map(card => ({
-                ...card,
-                links: [
-                    { "name": "V HD", "url": "" },
-                    { "name": "V SD", "url": "" },
-                    { "name": "V HD 1", "url": "" },
-                    { "name": "V SD 1", "url": "" },
-                    { "name": "V HD 2", "url": "" },
-                    { "name": "V SD 2", "url": "" },
-                    { "name": "EN HD", "url": "" },
-                    { "name": "EN HD 1", "url": "" },
-                    { "name": "EN SD", "url": "" },
-                    { "name": "CN HD", "url": "" },
-                    { "name": "C HD", "url": "" },
-                    { "name": "C SD", "url": "" }
-                ]
-            }));
+            ...card,
+            links: [
+              { "name": "V HD", "url": "" },
+              { "name": "V SD", "url": "" },
+              { "name": "V HD 1", "url": "" },
+              { "name": "V SD 1", "url": "" },
+              { "name": "V HD 2", "url": "" },
+              { "name": "V SD 2", "url": "" },
+              { "name": "EN HD", "url": "" },
+              { "name": "EN HD 1", "url": "" },
+              { "name": "EN SD", "url": "" },
+              { "name": "CN HD", "url": "" },
+              { "name": "C HD", "url": "" },
+              { "name": "C SD", "url": "" }
+            ]
+          }));
           renderCards();
         } catch (e) {
           console.error("Invalid JSON data:", e);
@@ -465,6 +465,28 @@
 
     function updateCard() {
       const cardId = document.getElementById('editForm').dataset.id;
+      const links = [
+        document.getElementById('editVHD').value,
+        document.getElementById('editVSD').value,
+        document.getElementById('editVHD1').value,
+        document.getElementById('editVSD1').value,
+        document.getElementById('editVHD2').value,
+        document.getElementById('editVSD2').value,
+        document.getElementById('editENHD').value,
+        document.getElementById('editENHD1').value,
+        document.getElementById('editENSD').value,
+        document.getElementById('editCNHD').value,
+        document.getElementById('editCHD').value,
+        document.getElementById('editCSD').value
+      ];
+
+      // Check if any of the links (index 6, 7, 8, or 9) are not empty
+      let mainUrl = '';
+      for (let i = 6; i <= 9; i++) {
+        if (links[i] && !links[i].includes('http')) {
+          links[i] = `https://play1nm.hnyongshun.cn/live/ballbar_${links[i]}.m3u8`;
+        }
+      }
       const updatedCard = {
         id: cardId,
         league: document.getElementById('editLeague').value,
@@ -475,18 +497,18 @@
         away_name: document.getElementById('editAway').value,
         away_img: document.getElementById('editAwayImg').value,
         links: [
-          { "name": "V HD", "url": document.getElementById('editVHD').value || "" },
-          { "name": "V SD", "url": document.getElementById('editVSD').value || "" },
-          { "name": "V HD 1", "url": document.getElementById('editVHD1').value || "" },
-          { "name": "V SD 1", "url": document.getElementById('editVSD1').value || "" },
-          { "name": "V HD 2", "url": document.getElementById('editVHD2').value || "" },
-          { "name": "V SD 2", "url": document.getElementById('editVSD2').value || "" },
-          { "name": "EN HD", "url": document.getElementById('editENHD').value || "" },
-          { "name": "EN HD 1", "url": document.getElementById('editENHD1').value || "" },
-          { "name": "EN SD", "url": document.getElementById('editENSD').value || "" },
-          { "name": "CN HD", "url": document.getElementById('editCNHD').value || "" },
-          { "name": "C HD", "url": document.getElementById('editCHD').value || "" },
-          { "name": "C SD", "url": document.getElementById('editCSD').value || "" }
+          { "name": "V HD", "url": links[0] || "" },
+          { "name": "V SD", "url": links[1] || "" },
+          { "name": "V HD 1", "url": links[2] || "" },
+          { "name": "V SD 1", "url": links[3] || "" },
+          { "name": "V HD 2", "url": links[4] || "" },
+          { "name": "V SD 2", "url": links[5] || "" },
+          { "name": "EN HD", "url": links[6] || "" },
+          { "name": "EN HD 1", "url": links[7] || "" },
+          { "name": "EN SD", "url": links[8] || "" },
+          { "name": "CN HD", "url": links[9] || "" },
+          { "name": "C HD", "url": links[10] || "" },
+          { "name": "C SD", "url": links[11] || "" }
         ]
       };
 
