@@ -97,7 +97,6 @@
     .card-title {
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 10px;
     }
 
     .card-content {
@@ -198,9 +197,9 @@
     <!-- Input Section -->
     <div class="input-container">
       <input type="text" id="jsonInput" placeholder="Enter JSON string">
-      <button onclick="loadData()">Submit With Links</button>
-      <button onclick="loadNoLinksData()">Submit With NoLinks</button>
-      <button onclick="saveToLocal()">Save Data With Links</button>
+      <button onclick="loadData()">Submit</button>
+      <button onclick="loadNoLinksData()">Submit With No Links</button>
+      <button onclick="saveToLocal()">Save Data</button>
       <button onclick="copyCard()">Copy Data No Links</button>
       <button onclick="copyName()">Copy Name</button>
       <button onclick="clearLocal()">Clear Data</button>
@@ -208,37 +207,28 @@
 
     <!-- Data Section -->
     <div class="edit-container">
-      <h3>Edit Form</h3>
       <form id="editForm">
         <div class="form-actions">
           <button type="button" class="update" onclick="updateCard()">Update</button>
           <button type="button" class="delete" onclick="deleteCard()">Delete</button>
         </div>
         <div class="form-group">
-          <label for="editLeague">League:</label>
+          <label for="editLeague">🏆:</label>
           <input type="text" id="editLeague">
-        </div>
-        <div class="form-group">
-          <label for="editTime">Time:</label>
+          <label for="editTime">⏰:</label>
           <input type="text" id="editTime">
-        </div>
-        <div class="form-group">
-          <label for="editDate">Date:</label>
+          <label for="editDate">⏰:</label>
           <input type="text" id="editDate">
         </div>
         <div class="form-group">
           <label for="editHome">Home:</label>
           <input type="text" id="editHome">
-        </div>
-        <div class="form-group">
           <label for="editHomeImg">HomeImg:</label>
           <input type="text" id="editHomeImg">
         </div>
         <div class="form-group">
           <label for="editAway">Away:</label>
           <input type="text" id="editAway">
-        </div>
-        <div class="form-group">
           <label for="editAwayImg">AwayImg:</label>
           <input type="text" id="editAwayImg">
         </div>
@@ -289,10 +279,14 @@
         <div class="form-group">
           <label for="editCHD">C HD URL:</label>
           <input type="text" id="editCHD">
-        </div>
-        <div class="form-group">
           <label for="editCSD">C SD URL:</label>
           <input type="text" id="editCSD">
+        </div>
+        <div class="form-group">
+        </div>
+        <div class="form-group">
+          <label for="editID">Match Id:</label>
+          <input type="text" id="editID" disabled>
         </div>
       </form>
     </div>
@@ -436,6 +430,7 @@
         cardElement.onclick = () => populateEditForm(card);
         cardElement.innerHTML = `
                 <div class="card-title">${card.league}</div>
+                <div class="card-content">⏰${card.date} - ${card.time}</div>
                 <div class="card-img"><img src="${card.home_img}" alt="${card.home_name}"> <img src="./src/vs.png"> <img src="${card.away_img}" alt="${card.away_name}"></div>
                 <div class="card-content">${card.home_name} vs ${card.away_name}</div>
             `;
