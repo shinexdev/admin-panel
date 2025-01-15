@@ -163,6 +163,21 @@
       background-color: #e53935;
     }
 
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .card-link {
+      background-color: #e0e0e0;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #333;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .container {
@@ -433,6 +448,9 @@
                 <div class="card-content">⏰${card.date} - ${card.time}</div>
                 <div class="card-img"><img src="${card.home_img}" alt="${card.home_name}"> <img src="./src/vs.png"> <img src="${card.away_img}" alt="${card.away_name}"></div>
                 <div class="card-content">${card.home_name} vs ${card.away_name}</div>
+                <div class="card-links">
+                  ${card.links.map(link => link.url ? `<div class="card-link">${link.name}</div>` : '').join('')}
+                </div>
             `;
         cardContainer.appendChild(cardElement);
       });
