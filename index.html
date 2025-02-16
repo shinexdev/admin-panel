@@ -444,7 +444,7 @@
         cardElement.classList.add('card');
         cardElement.onclick = () => populateEditForm(card);
         cardElement.innerHTML = `
-                <div class="card-title">${card.id} - ${card.league}</div>
+                <div class="card-title" id="${card.id}">${card.id} - ${card.league}</div>
                 <div class="card-content">⏰${card.date} - ${card.time}</div>
                 <div class="card-img"><img src="${card.home_img}" alt="${card.home_name}"> <img src="./src/vs.png"> <img src="${card.away_img}" alt="${card.away_name}"></div>
                 <div class="card-content">${card.home_name} vs ${card.away_name}</div>
@@ -535,6 +535,7 @@
         cardData[index] = updatedCard;
         saveToLocal();
         renderCards();
+        document.getElementById(cardId).scrollIntoView({ behavior: 'smooth' });
       }
     }
 
